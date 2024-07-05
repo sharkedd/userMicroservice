@@ -31,18 +31,29 @@ Este repositorio contiene un microservicio de usuario desarrollado con [NestJS](
 El proyecto está organizado de la siguiente manera:
 
 - **src/**: Contiene el código fuente del microservicio.
-  - **modules/**: Agrupa los diferentes módulos del microservicio.
-    - **user/**: Módulo principal para la gestión de usuarios.
-      - **user.controller.ts**: Controlador para manejar las solicitudes HTTP relacionadas con usuarios.
-      - **user.service.ts**: Servicio que contiene la lógica de negocio para la gestión de usuarios.
-      - **user.module.ts**: Módulo que agrupa el controlador y el servicio de usuarios.
-      - **user.entity.ts**: Entidad de TypeORM que define la estructura de la tabla de usuarios en la base de datos.
+  - **auth/**: Modulo principal de la autenticación de usuarios
+    - **guards/**: Módulo que contiene los guards, clases que condicionan el manejo de la request
+      - **auth.guard.ts/**: Authorization Guard, se autorizan rutas específicas cuando el usuario tenga ciertos permisos.
+      - **role.guard.ts/**: Role-Based Authentication, se autorizan rutan específicas cuando el usuario tenga cierto rol.
+    - **auth.controller.ts/**: Controlador para manejar solicitudes HTTP relacionadas con la autenticación del usuario.
+    - **auth.module.ts/**: Módulo que agrupa el controlador y el servicio de autenticación
+    - **auth.service.ts/**: Servicio que contiene la lógica de negocio para la autenticación de usuarios
+    - **constant.ts/**: Firma digital que utiliza el JWToken
+  - **dto/**: Módulo que contiene los DTO (Data transfer Object) para las solicitudes HTTP.
+    - **create-user.dto.ts/**: Patrón de datos para la creación de usuario
+    - **sign-in.dto.ts/**: Patrón de datos para el inicio de sesión
+  - **enum/**: Módulo que contiene los Enums y Decoradores
+    - **roles.decorator.ts/**: Decorador que permite especificar que roles tienen acceso a ciertas rutas
+    - **user-type.enum.ts/**: Enum que define los roles de usuarios disponibles
+  - **users/**: Módulo principal para la gestión de usuarios.
+    - **user.entity.ts**: Entidad de TypeORM que define la estructura de la tabla de usuarios en la base de datos.
+    - **users.controller.ts**: Controlador para manejar las solicitudes HTTP relacionadas con usuarios.
+    - **users.service.ts**: Servicio que contiene la lógica de negocio para la gestión de usuarios.
+    - **users.module.ts**: Módulo que agrupa el controlador y el servicio de usuarios.
   - **app.module.ts**: Módulo principal de la aplicación que importa todos los módulos necesarios.
   - **main.ts**: Archivo de entrada que inicializa la aplicación NestJS.
-- **test/**: Contiene las pruebas para el microservicio.
-- **.env**: Archivo de configuración para las variables de entorno.
-- **package.json**: Archivo de configuración del proyecto que incluye dependencias y scripts.
-- **tsconfig.json**: Archivo de configuración de TypeScript.
+- **.env**: Archivo de configuración para las variables de entorno. Contiene el puerto en el que se ejecuta la app.
+
 
 ## Instalación
 
